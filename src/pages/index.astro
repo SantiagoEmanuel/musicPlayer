@@ -112,16 +112,16 @@ import Layout from "../layouts/Layout.astro";
 	});
 
 	previous.addEventListener("click", () => {
-		if (song.src === "http://localhost:4321/forest-lullaby.mp3") {
-			songImg.src = "http://localhost:4321/cover-1.png";
-			song.src = "http://localhost:4321/lost-in-city-lights.mp3";
+		if (song.src === "/forest-lullaby.mp3") {
+			songImg.src = "/cover-1.png";
+			song.src = "/lost-in-city-lights.mp3";
 			songName.innerHTML = "Lost in the City Lights";
 			songArtist.innerHTML = "Cosmo Sheldrake";
 			actionBtn.classList.add("bx-play");
 			actionBtn.classList.remove("bx-pause");
 		} else {
-			songImg.src = "http://localhost:4321/cover-2.png";
-			song.src = "http://localhost:4321/forest-lullaby.mp3";
+			songImg.src = "/cover-2.png";
+			song.src = "/forest-lullaby.mp3";
 			songName.innerHTML = "Forest Lullaby";
 			songArtist.innerHTML = "Lesfm";
 			actionBtn.classList.add("bx-play");
@@ -130,16 +130,16 @@ import Layout from "../layouts/Layout.astro";
 	});
 
 	next.addEventListener("click", () => {
-		if (song.src === "http://localhost:4321/forest-lullaby.mp3") {
-			songImg.src = "http://localhost:4321/cover-1.png";
-			song.src = "http://localhost:4321/lost-in-city-lights.mp3";
+		if (song.src === "/forest-lullaby.mp3") {
+			songImg.src = "/cover-1.png";
+			song.src = "/lost-in-city-lights.mp3";
 			songName.innerHTML = "Lost in the City Lights";
 			songArtist.innerHTML = "Cosmo Sheldrake";
 			actionBtn.classList.add("bx-play");
 			actionBtn.classList.remove("bx-pause");
 		} else {
-			songImg.src = "http://localhost:4321/cover-2.png";
-			song.src = "http://localhost:4321/forest-lullaby.mp3";
+			songImg.src = "/cover-2.png";
+			song.src = "/forest-lullaby.mp3";
 			songName.innerHTML = "Forest Lullaby";
 			songArtist.innerHTML = "Lesfm";
 			actionBtn.classList.add("bx-play");
