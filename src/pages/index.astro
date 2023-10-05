@@ -1,0 +1,167 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Music player">
+	<main
+		class="flex justify-center items-center h-screen text-[#E5E7EB] [font-family:'Inter',sans-serif]"
+	>
+		<img
+			src="/bg.jpg"
+			alt="background"
+			class="absolute -z-20 w-[calc(100%+10px)] h-[calc(100%)]"
+		/>
+		<article
+			class="p-5 bg-[#1a2029] rounded-3xl flex flex-col gap-3 bg-opacity-70"
+		>
+			<div>
+				<img
+					src="/cover-2.png"
+					alt="Lost in the City Lights"
+					class="w-[325px] h-auto rounded-3xl"
+					id="song-img"
+				/>
+			</div>
+			<div class="flex flex-col gap-10">
+				<div class="flex flex-col text-center">
+					<p id="song-name" class="text-lg font-medium">
+						Forest Lullaby
+					</p>
+					<p id="song-artist" class="text-[#4D5562] text-xs">Lesfm</p>
+				</div>
+				<div class="flex flex-col gap-6 w-full">
+					<div class="hidden">
+						<audio controls id="song" src="/forest-lullaby.mp3">
+						</audio>
+					</div>
+					<div class="flex w-full relative">
+						<span
+							id="song-currentTime"
+							class="absolute left-0 -top-6 text-[#4D5562] text-[11px] font-semibold"
+							>00:00</span
+						>
+						<span
+							id="song-time"
+							class="absolute right-0 -top-6 text-[#4D5562] text-[11px] font-semibold"
+							>00:00</span
+						>
+						<input
+							type="range"
+							id="progress"
+							value="0"
+							class="w-full rounded-full cursor-pointer bg-hite h-1 appearance-none"
+						/>
+					</div>
+					<div class="flex w-full justify-center items-center gap-2">
+						<span id="previous" class="text-[#4D5562]">
+							<i class="bx bx-skip-previous text-4xl"></i>
+						</span>
+						<span class="text-[#C93B76]">
+							<i id="play-pause" class="bx bx-play text-7xl"> </i>
+						</span>
+						<span id="next" class="text-[#4D5562]">
+							<i class="bx bx-skip-next text-4xl"></i>
+						</span>
+					</div>
+				</div>
+			</div>
+		</article>
+	</main>
+</Layout>
+
+<script>
+	const song = document.getElementById("song");
+	const progress = document.getElementById("progress");
+	const songTime = document.getElementById("song-time");
+	const songCurrentTime = document.getElementById("song-currentTime");
+	const actionBtn = document.getElementById("play-pause");
+	const next = document.getElementById("next");
+	const previous = document.getElementById("previous");
+	const songName = document.getElementById("song-name");
+	const songArtist = document.getElementById("song-artist");
+	const src = document.getElementById("src");
+	const songImg = document.getElementById("song-img");
+
+	song.addEventListener("loadedmetadata", () => {});
+
+	actionBtn.addEventListener("click", () => {
+		progress.max = song.duration;
+		songTime.innerHTML = Number.parseFloat(song.duration / 60).toFixed(2);
+		if (actionBtn.classList.contains("bx-play")) {
+			song.play();
+			actionBtn.classList.remove("bx-play");
+			actionBtn.classList.add("bx-pause");
+			setInterval(() => {
+				progress.value = song.currentTime;
+				songCurrentTime.innerHTML = Number.parseFloat(
+					song.currentTime / 60,
+				).toFixed(2);
+			}, 500);
+		} else {
+			song.pause();
+			actionBtn.classList.add("bx-play");
+			actionBtn.classList.remove("bx-pause");
+		}
+	});
+
+	progress.addEventListener("change", () => {
+		song.currentTime = progress.value;
+		song.play();
+		actionBtn.classList.remove("bx-play");
+		actionBtn.classList.add("bx-pause");
+	});
+
+	previous.addEventListener("click", () => {
+		if (song.src === "http://localhost:4321/forest-lullaby.mp3") {
+			songImg.src = "http://localhost:4321/cover-1.png";
+			song.src = "http://localhost:4321/lost-in-city-lights.mp3";
+			songName.innerHTML = "Lost in the City Lights";
+			songArtist.innerHTML = "Cosmo Sheldrake";
+			actionBtn.classList.add("bx-play");
+			actionBtn.classList.remove("bx-pause");
+		} else {
+			songImg.src = "http://localhost:4321/cover-2.png";
+			song.src = "http://localhost:4321/forest-lullaby.mp3";
+			songName.innerHTML = "Forest Lullaby";
+			songArtist.innerHTML = "Lesfm";
+			actionBtn.classList.add("bx-play");
+			actionBtn.classList.remove("bx-pause");
+		}
+	});
+
+	next.addEventListener("click", () => {
+		if (song.src === "http://localhost:4321/forest-lullaby.mp3") {
+			songImg.src = "http://localhost:4321/cover-1.png";
+			song.src = "http://localhost:4321/lost-in-city-lights.mp3";
+			songName.innerHTML = "Lost in the City Lights";
+			songArtist.innerHTML = "Cosmo Sheldrake";
+			actionBtn.classList.add("bx-play");
+			actionBtn.classList.remove("bx-pause");
+		} else {
+			songImg.src = "http://localhost:4321/cover-2.png";
+			song.src = "http://localhost:4321/forest-lullaby.mp3";
+			songName.innerHTML = "Forest Lullaby";
+			songArtist.innerHTML = "Lesfm";
+			actionBtn.classList.add("bx-play");
+			actionBtn.classList.remove("bx-pause");
+		}
+	});
+</script>
+
+<style>
+	input[type="range"]::-webkit-slider-thumb {
+		height: 12px;
+		width: 12px;
+		border-radius: 50px;
+		background: #c93b76;
+		cursor: pointer;
+		-webkit-appearance: none;
+	}
+	input[type="range"]::-ms-thumb {
+		height: 12px;
+		width: 12px;
+		border-radius: 50px;
+		background: #c93b76;
+		cursor: pointer;
+	}
+</style>
