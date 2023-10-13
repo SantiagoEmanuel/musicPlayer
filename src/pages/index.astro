@@ -81,88 +81,191 @@ import Lost from "../songs/lost-in-city-lights.mp3";
 </Layout>
 
 <script>
+	// import Lost from "../songs/lost-in-city-lights.mp3";
+	// import Forest from "../songs/forest-lullaby.mp3";
+
+	// const song = document.getElementById("song");
+	// const progress = document.getElementById("progress");
+	// const songTime = document.getElementById("song-time");
+	// const songCurrentTime = document.getElementById("song-currentTime");
+	// const actionBtn = document.getElementById("play-pause");
+	// const next = document.getElementById("next");
+	// const previous = document.getElementById("previous");
+	// const songName = document.getElementById("song-name");
+	// const songArtist = document.getElementById("song-artist");
+	// const src = document.getElementById("src");
+	// const imgSong1 = document.getElementById("song-cover-1");
+	// const imgSong2 = document.getElementById("song-cover-2");
+
+	// song.addEventListener("loadedmetadata", () => {});
+
+	// actionBtn.addEventListener("click", () => {
+	// 	progress.max = song.duration;
+	// 	songTime.innerHTML = Number.parseFloat(song.duration / 60).toFixed(2);
+	// 	if (actionBtn.classList.contains("bx-play")) {
+	// 		song.play();
+	// 		actionBtn.classList.remove("bx-play");
+	// 		actionBtn.classList.add("bx-pause");
+	// 		setInterval(() => {
+	// 			progress.value = song.currentTime;
+	// 			songCurrentTime.innerHTML = Number.parseFloat(
+	// 				song.currentTime / 60,
+	// 			).toFixed(2);
+	// 		}, 500);
+	// 	} else {
+	// 		song.pause();
+	// 		actionBtn.classList.add("bx-play");
+	// 		actionBtn.classList.remove("bx-pause");
+	// 	}
+	// });
+
+	// progress.addEventListener("change", () => {
+	// 	song.currentTime = progress.value;
+	// 	song.play();
+	// 	actionBtn.classList.remove("bx-play");
+	// 	actionBtn.classList.add("bx-pause");
+	// });
+
+	// previous.addEventListener("click", () => {
+	// 	if (!imgSong2.classList.contains("hidden")) {
+	// 		imgSong1.classList.remove("hidden");
+	// 		imgSong2.classList.add("hidden");
+	// 		song.src = Lost;
+	// 		songName.innerHTML = "Lost in the City Lights";
+	// 		songArtist.innerHTML = "Cosmo Sheldrake";
+	// 		actionBtn.classList.add("bx-play");
+	// 		actionBtn.classList.remove("bx-pause");
+	// 	} else {
+	// 		imgSong1.classList.add("hidden");
+	// 		imgSong2.classList.remove("hidden");
+	// 		song.src = Forest;
+	// 		songName.innerHTML = "Forest Lullaby";
+	// 		songArtist.innerHTML = "Lesfm";
+	// 		actionBtn.classList.add("bx-play");
+	// 		actionBtn.classList.remove("bx-pause");
+	// 	}
+	// });
+
+	// next.addEventListener("click", () => {
+	// 	if (!imgSong2.classList.contains("hidden")) {
+	// 		imgSong1.classList.remove("hidden");
+	// 		imgSong2.classList.add("hidden");
+	// 		song.src = Lost;
+	// 		songName.innerHTML = "Lost in the City Lights";
+	// 		songArtist.innerHTML = "Cosmo Sheldrake";
+	// 		actionBtn.classList.add("bx-play");
+	// 		actionBtn.classList.remove("bx-pause");
+	// 	} else {
+	// 		imgSong1.classList.add("hidden");
+	// 		imgSong2.classList.remove("hidden");
+	// 		song.src = Forest;
+	// 		songName.innerHTML = "Forest Lullaby";
+	// 		songArtist.innerHTML = "Lesfm";
+	// 		actionBtn.classList.add("bx-play");
+	// 		actionBtn.classList.remove("bx-pause");
+	// 	}
+	// });
+
 	import Lost from "../songs/lost-in-city-lights.mp3";
 	import Forest from "../songs/forest-lullaby.mp3";
 
-	const song = document.getElementById("song");
-	const progress = document.getElementById("progress");
-	const songTime = document.getElementById("song-time");
-	const songCurrentTime = document.getElementById("song-currentTime");
-	const actionBtn = document.getElementById("play-pause");
-	const next = document.getElementById("next");
-	const previous = document.getElementById("previous");
-	const songName = document.getElementById("song-name");
-	const songArtist = document.getElementById("song-artist");
-	const src = document.getElementById("src");
-	const imgSong1 = document.getElementById("song-cover-1");
-	const imgSong2 = document.getElementById("song-cover-2");
+	document.addEventListener("DOMContentLoaded", () => {
+		const song = document.getElementById("song");
+		const progress = document.getElementById("progress");
+		const songTime = document.getElementById("song-time");
+		const songCurrentTime = document.getElementById("song-currentTime");
+		const actionBtn = document.getElementById("play-pause");
+		const next = document.getElementById("next");
+		const previous = document.getElementById("previous");
+		const songName = document.getElementById("song-name");
+		const songArtist = document.getElementById("song-artist");
+		const src = document.getElementById("src");
+		const imgSong1 = document.getElementById("song-cover-1");
+		const imgSong2 = document.getElementById("song-cover-2");
 
-	song.addEventListener("loadedmetadata", () => {});
+		progress.max = Math.floor(song.duration);
 
-	actionBtn.addEventListener("click", () => {
-		progress.max = song.duration;
-		songTime.innerHTML = Number.parseFloat(song.duration / 60).toFixed(2);
-		if (actionBtn.classList.contains("bx-play")) {
+		actionBtn.addEventListener("click", () => {
+			if (!actionBtn.classList.contains("bx-play")) {
+				song.pause();
+			} else {
+				song.play();
+			}
+		});
+
+		progress.addEventListener("change", () => {
+			song.currentTime = progress.value;
 			song.play();
+		});
+
+		previous.addEventListener("click", () => {
+			nextSong();
+		});
+
+		next.addEventListener("click", () => {
+			nextSong();
+		});
+
+		function nextSong() {
+			if (!imgSong2.classList.contains("hidden")) {
+				imgSong1.classList.remove("hidden");
+				imgSong2.classList.add("hidden");
+				song.src = Lost;
+				songName.innerHTML = "Lost in the City Lights";
+				songArtist.innerHTML = "Cosmo Sheldrake";
+				song.play();
+				progress.max = Math.floor(song.duration);
+			} else {
+				imgSong1.classList.add("hidden");
+				imgSong2.classList.remove("hidden");
+				song.src = Forest;
+				songName.innerHTML = "Forest Lullaby";
+				songArtist.innerHTML = "Lesfm";
+				song.play();
+				setTimeout(() => {
+					progress.max = Math.floor(song.duration);
+				}, 500);
+			}
+		}
+
+		song.addEventListener("play", () => {
 			actionBtn.classList.remove("bx-play");
 			actionBtn.classList.add("bx-pause");
-			setInterval(() => {
-				progress.value = song.currentTime;
-				songCurrentTime.innerHTML = Number.parseFloat(
-					song.currentTime / 60,
-				).toFixed(2);
+			setTimeout(() => {
+				setMaxTime(song.duration);
 			}, 500);
-		} else {
-			song.pause();
+			setInterval(() => {
+				setCurrentTime(song.currentTime);
+			}, 500);
+		});
+		song.addEventListener("pause", () => {
+			if (progress.value == Math.floor(song.currentTime)) {
+				nextSong();
+				console.log(progress.value, Math.floor(song.currentTime));
+			}
+			console.log(progress.value, Math.floor(song.currentTime));
 			actionBtn.classList.add("bx-play");
 			actionBtn.classList.remove("bx-pause");
+		});
+
+		function setMaxTime(max) {
+			songTime.innerHTML = timeFormater(max);
 		}
-	});
-
-	progress.addEventListener("change", () => {
-		song.currentTime = progress.value;
-		song.play();
-		actionBtn.classList.remove("bx-play");
-		actionBtn.classList.add("bx-pause");
-	});
-
-	previous.addEventListener("click", () => {
-		if (!imgSong2.classList.contains("hidden")) {
-			imgSong1.classList.remove("hidden");
-			imgSong2.classList.add("hidden");
-			song.src = Lost;
-			songName.innerHTML = "Lost in the City Lights";
-			songArtist.innerHTML = "Cosmo Sheldrake";
-			actionBtn.classList.add("bx-play");
-			actionBtn.classList.remove("bx-pause");
-		} else {
-			imgSong1.classList.add("hidden");
-			imgSong2.classList.remove("hidden");
-			song.src = Forest;
-			songName.innerHTML = "Forest Lullaby";
-			songArtist.innerHTML = "Lesfm";
-			actionBtn.classList.add("bx-play");
-			actionBtn.classList.remove("bx-pause");
+		function setCurrentTime(time) {
+			songCurrentTime.innerHTML = timeFormater(time);
+			progress.value = song.currentTime;
 		}
-	});
 
-	next.addEventListener("click", () => {
-		if (!imgSong2.classList.contains("hidden")) {
-			imgSong1.classList.remove("hidden");
-			imgSong2.classList.add("hidden");
-			song.src = Lost;
-			songName.innerHTML = "Lost in the City Lights";
-			songArtist.innerHTML = "Cosmo Sheldrake";
-			actionBtn.classList.add("bx-play");
-			actionBtn.classList.remove("bx-pause");
-		} else {
-			imgSong1.classList.add("hidden");
-			imgSong2.classList.remove("hidden");
-			song.src = Forest;
-			songName.innerHTML = "Forest Lullaby";
-			songArtist.innerHTML = "Lesfm";
-			actionBtn.classList.add("bx-play");
-			actionBtn.classList.remove("bx-pause");
+		function timeFormater(time) {
+			let min = Math.floor(time / 60);
+			if (min < 10) {
+				min = `0${min}`;
+			}
+			let sec = Math.floor(time % 60);
+			if (sec < 10) {
+				sec = `0${sec}`;
+			}
+			return `${min} : ${sec}`;
 		}
 	});
 </script>
