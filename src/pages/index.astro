@@ -242,7 +242,7 @@ import Lost from "../songs/lost-in-city-lights.mp3";
 			}, 500);
 		});
 		song.addEventListener("pause", () => {
-			if (progress.value == Math.floor(song.currentTime)) {
+			if (progress.value == Math.floor(song.duration)) {
 				nextSong();
 				console.log(progress.value, Math.floor(song.currentTime));
 			}
